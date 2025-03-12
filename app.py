@@ -21,7 +21,9 @@ st.sidebar.header("User Input Parameters: ")
 
 def user_input_features():
     age = st.sidebar.slider("Age: ", 10, 100, 30)
-    bmi = st.sidebar.slider("BMI: ", 15, 40, 20)
+    weight = st.sidebar.slider("Weight (kg): ", 30, 150, 70)
+    height = st.sidebar.slider("Height (cm): ", 100, 220, 170)
+    bmi = weight / ((height / 100) ** 2)
     duration = st.sidebar.slider("Duration (min): ", 0, 35, 15)
     heart_rate = st.sidebar.slider("Heart Rate: ", 60, 130, 80)
     body_temp = st.sidebar.slider("Body Temperature (C): ", 36, 42, 38)
@@ -32,7 +34,7 @@ def user_input_features():
     # Use column names to match the training data
     data_model = {
         "Age": age,
-        "BMI": bmi,
+        "BMI": round(bmi, 2),
         "Duration": duration,
         "Heart_Rate": heart_rate,
         "Body_Temp": body_temp,
