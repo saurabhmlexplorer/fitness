@@ -128,3 +128,40 @@ st.write("You are older than", round(sum(boolean_age) / len(boolean_age), 2) * 1
 st.write("Your exercise duration is higher than", round(sum(boolean_duration) / len(boolean_duration), 2) * 100, "% of other people.")
 st.write("You have a higher heart rate than", round(sum(boolean_heart_rate) / len(boolean_heart_rate), 2) * 100, "% of other people during exercise.")
 st.write("You have a higher body temperature than", round(sum(boolean_body_temp) / len(boolean_body_temp), 2) * 100, "% of other people during exercise.")
+
+st.write("---")
+st.header("Personalized Recommendations: ")
+
+recommendations = []
+
+# BMI Analysis
+if df["BMI"].values[0] < 18.5:
+    recommendations.append("🔹 Your BMI suggests you are underweight. Consider a balanced diet with calorie-dense, nutritious foods to maintain energy levels.")
+elif 18.5 <= df["BMI"].values[0] < 24.9:
+    recommendations.append("✅ Your BMI is in the healthy range! Maintain it with a good balance of nutrition and exercise.")
+elif 25 <= df["BMI"].values[0] < 29.9:
+    recommendations.append("⚠️ Your BMI indicates that you are overweight. Try incorporating more cardio workouts and a balanced diet to reduce excess weight.")
+else:
+    recommendations.append("⚠️ Your BMI falls in the obesity range. Regular physical activity and a monitored diet plan may help improve your fitness levels.")
+
+# Heart Rate Analysis
+if df["Heart_Rate"].values[0] > 100:
+    recommendations.append("🔴 Your heart rate is higher than average during exercise. Consider reducing intensity or consulting a doctor if it remains elevated.")
+elif df["Heart_Rate"].values[0] < 70:
+    recommendations.append("🟢 Your heart rate is lower than average. Ensure you are engaging in effective workouts to raise cardiovascular endurance.")
+
+# Exercise Duration
+if df["Duration"].values[0] < 10:
+    recommendations.append("🟠 Your workout duration is quite short. Aim for at least **30 minutes of moderate exercise** per session for better results.")
+elif df["Duration"].values[0] > 30:
+    recommendations.append("✅ Great job! You are meeting the recommended exercise duration. Make sure to stay hydrated and allow time for recovery.")
+
+# Body Temperature
+if df["Body_Temp"].values[0] > 39:
+    recommendations.append("⚠️ Your body temperature is quite high. Stay hydrated, avoid overheating, and rest when necessary.")
+elif df["Body_Temp"].values[0] < 36.5:
+    recommendations.append("🔵 Your body temperature is lower than normal. Make sure to warm up properly before workouts.")
+
+# Display Recommendations
+for rec in recommendations:
+    st.write(rec)
